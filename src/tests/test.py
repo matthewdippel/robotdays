@@ -2,7 +2,7 @@
 import sys
 import os
 
-def run(verbosity=1,doctest=False,numpy=True):
+def run(verbosity=1,doctest=False):
     """Run RobotDays tests.
     Parameters
     ----------
@@ -10,8 +10,6 @@ def run(verbosity=1,doctest=False,numpy=True):
       Level of detail in test reports.  Higher numbers provide  more detail.
     doctest: bool, optional
       True to run doctests in code modules
-    numpy: bool, optional
-      True to test modules dependent on numpy
     """
     try:
         import nose
