@@ -2,10 +2,12 @@ import datetime
 
 class TimeSlot():
     def __init__(self, start, end):
-        if not isinstance(start, datetime.date):
-            raise ValueError("arg start must be a datetime.date object")
-        if not isinstance(start, datetime.date):
-            raise ValueError("arg end must be a datetime.date object")
+        if not isinstance(start, datetime.datetime):
+            raise ValueError("arg start must be a datetime.datetime object")
+        if not isinstance(end, datetime.datetime):
+            raise ValueError("arg end must be a datetime.datetime object")
+        if start >= end:
+            raise ValueError("arg start must be strictly before arg end")
         self._start = start
         self._end   = end
         return
@@ -43,7 +45,8 @@ class TimeSlot():
         :return: whether or not they intersect
         :rtype: bool
         """
-        pass
+        return (other.start <= self.start < other.end) or (self.start <= other.start < self.end)
+
 
     def intersects_boundary_with(self, other):
         """
@@ -54,4 +57,4 @@ class TimeSlot():
         :return: whether or not they intersect
         :rtype: bool
         """
-        pass
+        return (other.start <= self.start <= other.end) or (self.start <= other.start <= self.end)

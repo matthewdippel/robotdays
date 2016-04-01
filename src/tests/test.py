@@ -35,4 +35,4 @@ def run(verbosity=1,doctest=False):
     nose.run(argv=argv)
 
 if __name__=="__main__":
-    run(2)
+    run(3)
