@@ -9,7 +9,7 @@ from datetime import datetime as DT
 
 from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
 
-class test_TimeSlot_init(object):
+class test_TimeSlot(object):
     """
     Tests for simple initilization of TimeSlot objects
     """
