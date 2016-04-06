@@ -16,7 +16,7 @@ class test_ScheduledTask(object):
     """
     def test_simple_init(self):
         """
-        simple init raises no errors
+        correct init of ScheduledTask raises no errors
         """
         a = DT.today()
         b = DT.today()
@@ -25,4 +25,13 @@ class test_ScheduledTask(object):
         return
 
     def test_bad_params_raise_errors(self):
-        pass
+        """
+        bad params to ScheduledTask raises ValueError
+        """
+        assert_raises(ValueError, ScheduledTask, None, None)
+        a = DT.today()
+        b = DT.today()
+        ts = TimeSlot(a,b)
+        assert_raises(ValueError, ScheduledTask, "eat food", "eat food")
+        assert_raises(ValueError, ScheduledTask, ts, "eat food")
+        return
