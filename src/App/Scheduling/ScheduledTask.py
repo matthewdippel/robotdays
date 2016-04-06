@@ -3,7 +3,7 @@ from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
 class ScheduledTask():
     def __init__(self, name, timeslot):
         self._name = name
-        if not isinstance(start, TimeSlot):
+        if not isinstance(timeslot, TimeSlot):
             raise ValueError("arg timeslot must be a TimeSlot object")
         self._timeslot = timeslot
         return
