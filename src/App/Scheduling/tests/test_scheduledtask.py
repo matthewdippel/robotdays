@@ -34,4 +34,27 @@ class test_ScheduledTask(object):
         ts = TimeSlot(a,b)
         assert_raises(ValueError, ScheduledTask, "eat food", "eat food")
         assert_raises(ValueError, ScheduledTask, ts, "eat food")
+        st_raises_no_errors = ScheduledTask("eat food", ts)
         return
+
+    def test_gt_lt(self):
+        a = DT.today()
+        b = DT.today()
+        c = DT.today()
+        d = DT.today()
+
+        ts_ab = TimeSlot(a, b)
+        ts_cd = TimeSlot(c, d)
+        st_ab = ScheduledTask("ab", ts_ab)
+        st_cd = ScheduledTask("cd", ts_cd)
+        assert_true(st_ab < st_cd)
+        assert_true(st_ab <= st_cd)
+
+        assert_true(st_cd > st_ab)
+        assert_true(st_cd >= st_ab)
+
+        assert_false(st_ab > st_cd)
+        assert_false(st_ab >= st_cd)
+
+        assert_false(st_cd < st_ab)
+        assert_false(st_cd <= st_ab)

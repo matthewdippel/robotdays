@@ -15,3 +15,15 @@ class ScheduledTask():
     @property
     def timeslot(self):
         return self._timeslot
+
+    def __lt__(self, other):
+        return self.timeslot.end < other.timeslot.start
+
+    def __gt__(self, other):
+        return self.timeslot.start > other.timeslot.end
+
+    def __le__(self, other):
+        return self.timeslot.end <= other.timeslot.start
+
+    def __ge__(self, other):
+        return self.timeslot.start >= other.timeslot.end
