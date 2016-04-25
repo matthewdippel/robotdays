@@ -49,12 +49,24 @@ class test_ScheduledTask(object):
         st_cd = ScheduledTask("cd", ts_cd)
         assert_true(st_ab < st_cd)
         assert_true(st_ab <= st_cd)
-
-        assert_true(st_cd > st_ab)
-        assert_true(st_cd >= st_ab)
-
         assert_false(st_ab > st_cd)
         assert_false(st_ab >= st_cd)
 
+        assert_true(st_cd > st_ab)
+        assert_true(st_cd >= st_ab)
         assert_false(st_cd < st_ab)
         assert_false(st_cd <= st_ab)
+
+        ts_bc = TimeSlot(b, c)
+        st_bc = ScheduledTask("bc", ts_bc)
+
+        assert_true(st_ab <= st_bc)
+        assert_false(st_ab < st_bc)
+        assert_false(st_ab > st_bc)
+        assert_false(st_ab >= st_bc)
+
+        assert_true(st_bc >= st_ab)
+        assert_false(st_bc > st_ab)
+        assert_false(st_bc < st_ab)
+        assert_false(st_bc <= st_ab)
+        return
