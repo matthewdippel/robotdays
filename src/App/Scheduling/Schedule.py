@@ -1,4 +1,4 @@
-from robotdays.src.App.DataStructures.ScheduledTask import ScheduledTask
+from ScheduledTask import ScheduledTask
 
 class Schedule():
     def __init__(self):
@@ -13,7 +13,14 @@ class Schedule():
         :return: does not return any value
         :rtype: None
         """
-        pass
+
+        if isinstance(task, ScheduledTask):
+            if self.can_hold_task(task):
+                self._tasks.append(task)
+            else:
+                raise ValueError('schedule conflict!')
+        else:
+            raise ValueError('inserted should be a ScheduledTask')
 
     def can_hold_task(self, task):
         """
@@ -24,5 +31,16 @@ class Schedule():
         :return: whether or not task fits into the schedule
         :rtype: bool
         """
-        pass
+        for existing_task in self._tasks:
+
+   #         if (task.timeslot.start> existing_task.timeslot.start
+    #                and task.timeslot.start< existing_task.timeslot.start)\
+     #               or (task.timeslot.end> existing_task.timeslot.start
+      #              and task.timeslot.end< existing_task.timeslot.end)\
+       #             or (task.timeslot.end> existing_task.timeslot.end
+        #            and task.timeslot.start< existing_task.timeslot.start):
+            if existing_task.timeslot.intersects_internally_with(task.timeslot) or existing_task.timeslot.intersects_boundary_with(task.timeslot):
+                return False
+        return True
+
 
