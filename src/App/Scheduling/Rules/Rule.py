@@ -7,3 +7,6 @@ class Rule():
     """
     def __init__(self):
         return
+
+    def satisfied_by(self, scheduled_task):
+        raise NotImplementedError
