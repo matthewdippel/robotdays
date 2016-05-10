@@ -1,11 +1,15 @@
 __author__ = 'mdippel'
 
 from Rules.Rule import Rule
+import datetime
 
 class Task():
-    def __init__(self, name):
+    def __init__(self, name, length):
+        if not isinstance(length, datetime.timedelta:
+            raise ValueError("arg length must be a datetime.timedelta object")
         self._name = name
         self._rules = {}
+        self._length = length
 
     def add_rule(self, rule):
         """
@@ -22,3 +26,15 @@ class Task():
             self._rules[rule_type] = []
         self._rules[rule_type].append(rule)
         return
+
+    def can_start_at(self, start):
+        """
+        determine whether or not the current set of rules allow
+        this task to start at the specified time
+        :param start: the proposed start time
+        :type start: datetime.datetime
+        :return: answer to whether or not this Task can begin at time start
+        :rtype : bool
+        """
+        if not isinstance(start, datetime.datetime):
+            raise ValueError("arg start must be a datetime.datetime object")
