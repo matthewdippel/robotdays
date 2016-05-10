@@ -8,7 +8,7 @@ import datetime
 
 class Task():
     def __init__(self, name, length):
-        if not isinstance(length, datetime.timedelta:
+        if not isinstance(length, datetime.timedelta):
             raise ValueError("arg length must be a datetime.timedelta object")
         self._name = name
         self._rules = {}
