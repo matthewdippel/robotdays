@@ -1,6 +1,9 @@
 __author__ = 'mdippel'
 
 from Rules.Rule import Rule
+from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
+from robotdays.src.App.Scheduling.ScheduledTask import ScheduledTask
+
 import datetime
 
 class Task():
@@ -38,3 +41,12 @@ class Task():
         """
         if not isinstance(start, datetime.datetime):
             raise ValueError("arg start must be a datetime.datetime object")
+
+        proposed_timeslot = TimeSlot(start, start + self._length)
+        proposed_scheduled_task = ScheduledTask(self._name, proposed_timeslot)
+
+        for rule_type in self._rules:
+            for rule in self._rules[keys]:
+                if not rule.satisfied_by(proposed_scheduled_task):
+                    return False
+        return True
