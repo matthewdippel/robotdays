@@ -19,4 +19,7 @@ class NoOverlapRule(Rule):
         :param scheduled_task:
         :return:
         """
-        pass
+        for timeslot in self._timeslots_to_avoid:
+            if scheduled_task.timeslot.intersects_internally_with(timeslot):
+                return False
+        return True
