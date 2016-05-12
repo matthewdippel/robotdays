@@ -1,6 +1,7 @@
 __author__ = 'mdippel'
 
 from robotdays.src.App.Scheduling.Rules.Rule import Rule
+from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
 
 class NoOverlapRule(Rule):
     """
@@ -8,6 +9,15 @@ class NoOverlapRule(Rule):
     """
     def __init__(self):
         self._timeslots_to_avoid = []
+
+    def add_timeslot_to_avoid(self, timeslot):
+        if not isinstance(timeslot, TimeSlot):
+            raise ValueError("param timeslot must be of type TimeSlot")
+        self._timeslots_to_avoid.append(timeslot)
+        return
+
+    def timeslot_count(self):
+        return len(self._timeslots_to_avoid)
 
     def satisfied_by(self, scheduled_task):
         """
