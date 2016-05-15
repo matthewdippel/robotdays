@@ -35,4 +35,9 @@ class SegmentedSchedule():
         self._stored_tasks = {}
         return
 
+    def start_time_of_ith_task(self, i):
+        if i < 0 or i >= self._length:
+            raise ValueError("arg i should be in the range [0, self._length - 1]")
+        return self._start + (i * self._segment_length)
+
 

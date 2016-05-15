@@ -38,3 +38,28 @@ class test_NoOverlapRule(object):
         r.add_timeslot_to_avoid(TimeSlot(DT.today(), DT.today()))
         assert_equal(r.timeslot_count(), 2, "added 2 rules")
         return
+
+    def test_trivial_satisfaction(self):
+        r = NoOverlapRule()
+        for _ in range(100):
+            r.add_timeslot_to_avoid(TimeSlot(DT.today(), DT.today()))
+            ST = ScheduledTask("stuff", TimeSlot(DT.today(), DT.today()))
+            assert_true(r.satisfied_by(ST), "all rules are scheduled before the dummy task")
+        return
+
+    def test_trivial_overlap(self):
+        r = NoOverlapRule()
+        for i in range(100):
+            a = DT.today()
+            b = DT.today()
+            c = DT.today()
+            d = DT.today()
+            if i % 2 == 0:
+                r.add_timeslot_to_avoid(TimeSlot(a, d))
+                ST = ScheduledTask("stuff", TimeSlot(b,c))
+                assert_false(r.satisfied_by(ST), "there is overlap")
+            else:
+                r.add_timeslot_to_avoid(TimeSlot(a, c))
+                ST = ScheduledTask("stuff", TimeSlot(b,d))
+                assert_false(r.satisfied_by(ST), "there is overlap")
+            return
