@@ -6,6 +6,7 @@ from robotdays.src.App.Scheduling.ScheduledTask import ScheduledTask
 
 import datetime
 
+
 class Task():
     def __init__(self, name, length):
         if not isinstance(length, datetime.timedelta):

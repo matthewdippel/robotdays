@@ -28,3 +28,47 @@ class test_SegmentedSchedule(object):
         assert_raises(ValueError, SegmentedSchedule, l, None, b)
         assert_raises(ValueError, SegmentedSchedule, l, a, None)
         assert_raises(ValueError, SegmentedSchedule, l, b, a)
+        assert_raises(ValueError, SegmentedSchedule, 0, a, b)
+
+    def test_good_params_to_init_raise_no_errors(self):
+        a = DT.today()
+        b = DT.today()
+        l = 10
+
+        S = SegmentedSchedule(l, a, b)
+        return
+
+    def test_length_is_properly_returned(self):
+        a = DT.today()
+        b = DT.today()
+        l = 1234
+
+        S = SegmentedSchedule(l, a, b)
+        assert_equal(S.length, 1234, "length should be equal to the param given to init")
+        return
+
+    def test_slots_start_empty(self):
+        a = DT.today()
+        b = DT.today()
+        l = 100
+        S = SegmentedSchedule(l, a, b)
+        for i in range(l):
+            assert_equal(S.task_at_ith_slot(i), None)
+        return
+
+    def test_bad_params_to_taskatithslot_raises_errors(self):
+        a = DT.today()
+        b = DT.today()
+        l = 100
+        S = SegmentedSchedule(l, a, b)
+        assert_raises(ValueError, S.task_at_ith_slot, -1)
+        assert_raises(ValueError, S.task_at_ith_slot, 100)
+
+
+    def task_bad_params_to_startofithslot_raises_errors(self):
+        a = DT.today()
+        b = DT.today()
+        l = 100
+        S = SegmentedSchedule(l, a, b)
+        assert_raises(ValueError, S.start_of_ith_slot, -1)
+        assert_raises(ValueError, S.start_of_ith_slot, 100)
