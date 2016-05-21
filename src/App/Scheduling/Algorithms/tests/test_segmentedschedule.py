@@ -12,6 +12,7 @@ from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
 from robotdays.src.App.Scheduling.ScheduledTask import ScheduledTask
 from robotdays.src.App.Scheduling.Schedule import Schedule
 from robotdays.src.App.Scheduling.Rules.NoOverlapRule import NoOverlapRule
+from robotdays.src.App.Scheduling.Algorithms.SegmentedSchedule import SegmentedSchedule
 
 class test_SegmentedSchedule(object):
 
@@ -19,4 +20,11 @@ class test_SegmentedSchedule(object):
         """
         bad params to SegmentedSchedule init raises ValueErrors
         """
-        assert_false(True, "implement this test")
+        assert_raises(ValueError, SegmentedSchedule, None, None, None)
+        a = DT.today()
+        b = DT.today()
+        l = 10
+        assert_raises(ValueError, SegmentedSchedule, None, a, b)
+        assert_raises(ValueError, SegmentedSchedule, l, None, b)
+        assert_raises(ValueError, SegmentedSchedule, l, a, None)
+        assert_raises(ValueError, SegmentedSchedule, l, b, a)

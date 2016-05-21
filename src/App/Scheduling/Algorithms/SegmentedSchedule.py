@@ -1,6 +1,6 @@
 __author__ = 'mdippel'
 
-from datetime import datetime
+import datetime
 class SegmentedSchedule():
     """
     represents a segmented schedule
@@ -24,10 +24,14 @@ class SegmentedSchedule():
 
         :return: the SegmentedSchedule object
         """
+        if not isinstance(length, int):
+            raise ValueError("arg length must be an int")
         if not isinstance(start, datetime.datetime):
             raise ValueError("arg start must be a datetime.datetime object")
         if not isinstance(end, datetime.datetime):
             raise ValueError("arg end must be a datetime.datetime object")
+        if end <= start:
+            raise ValueError("arg end must occur after arg start")
         self._length = length
         self._segmented_tasks = [None] * length
         self._start, self._end = start, end
