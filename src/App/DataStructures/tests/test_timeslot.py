@@ -1,3 +1,6 @@
+import sys
+print sys.path
+
 from nose.tools import assert_equal
 from nose.tools import assert_is
 from nose.tools import assert_not_equal
@@ -5,9 +8,12 @@ from nose.tools import assert_raises
 from nose.tools import assert_true
 from nose.tools import assert_false
 
-from datetime import datetime as DT
+#from datetime import datetime as DT
+from robotdays.src.tests.HelperClasses import UniqueDT as UniqueDT
+DT = UniqueDT.UniqueDT()
 
 from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
+
 
 class test_TimeSlot(object):
     """
