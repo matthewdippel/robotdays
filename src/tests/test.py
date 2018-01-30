@@ -2,7 +2,8 @@
 import sys
 import os
 
-def run(verbosity=1,doctest=False):
+
+def run(verbosity=1, doctest=False):
     """Run RobotDays tests.
     Parameters
     ----------
@@ -14,25 +15,26 @@ def run(verbosity=1,doctest=False):
     try:
         import nose
     except ImportError:
-        raise ImportError(\
+        raise ImportError(
             "The nose package is needed to run the NetworkX tests.")
 
     sys.stderr.write("Running RobotDays tests:\n")
-    nx_install_dir=os.path.join(os.path.dirname(__file__), os.path.pardir)
+    nx_install_dir = os.path.join(os.path.dirname(__file__), os.path.pardir)
     # stop if running from source directory
-    if os.getcwd() == os.path.abspath(os.path.join(nx_install_dir,os.path.pardir)):
+    if os.getcwd() == os.path.abspath(os.path.join(nx_install_dir,
+                                                   os.path.pardir)):
         raise RuntimeError("Can't run tests from source directory.\n"
                            "Run 'nosetests' from the command line.")
 
-    argv=[' ','--verbosity=%d'%verbosity,
-          '-w',nx_install_dir,
-          '-exe']
+    argv = [' ', '--verbosity=%d' % verbosity,
+            '-w', nx_install_dir,
+            '-exe']
     if doctest:
-        argv.extend(['--with-doctest','--doctest-extension=txt'])
-
+        argv.extend(['--with-doctest', '--doctest-extension=txt'])
 
     sys.path.append(os.path.join('..', 'App'))
     nose.run(argv=argv)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     run(3)
