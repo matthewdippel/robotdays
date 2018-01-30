@@ -6,7 +6,8 @@ from nose.tools import assert_raises
 from nose.tools import assert_true
 from nose.tools import assert_false
 
-from datetime import datetime as DT
+from robotdays.src.tests.HelperClasses import UniqueDT as UniqueDT
+DT = UniqueDT.UniqueDT()
 
 from robotdays.src.App.DataStructures.TimeSlot import TimeSlot
 from robotdays.src.App.Scheduling.ScheduledTask import ScheduledTask
